@@ -20,6 +20,8 @@ var player;
 var stars;
 var platforms;
 var cursors;
+var score = 0;
+var scoreText;
 
 var game = new Phaser.Game(config);
 
@@ -85,6 +87,8 @@ function create() {
 
     });
 
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
 
@@ -116,6 +120,10 @@ function update() {
 
 }
 
-function collectStar(player, star) {
+function collectStar(player, star) 
+{
     star.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
 }
